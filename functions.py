@@ -126,3 +126,41 @@ def plot_box_country(df):
         ax.spines[loc].set_visible(False)
 
     fig.show()
+
+def plot_world_map(df):
+    temp = create_array_for_drawing(df)
+    temp['color'] = temp['count'].apply(lambda x : '#b20710' if x > temp['count'].values[30] else 'grey')
+
+    #loading geodataframe
+    world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+
+    #converting country names to iso codes
+    temp['iso_code'] = coco.convert(names=temp['country'], to ='ISO3')
+    temp = temp[temp['iso_code'] != 'not found']
+
+    # merging geodataframe and pandas dataframe
+    temp_map = world.merge(temp,left_on = 'iso_a3', right_on = 'iso_code')
+
+    temp_map.drop(columns = ['continent', 'gdp_md_est','pop_est','name',], inplace = True)
+    temp_map = temp_map.sort_values(by = 'count', ascending = False)
+
+
+    #viualization
+    colors = ['grey','#f8f9f9','#b20710']
+    cmap  = matplotlib.colors.LinearSegmentedColormap.from_list("", colors = colors)
+
+    fig, ax  = plt.subplots(figsize = (15,7.5), dpi = 80)
+    fig.patch.set_facecolor('#f6f5f5')
+    ax.set_facecolor('#f6f5f5')
+    temp_map.dropna().plot(column = 'count', 
+                        color = temp_map.dropna()['color'], 
+                        cmap = cmap,
+                        scheme='quantiles', 
+                        k=10, legend = False,
+                        ax = ax)
+
+    for loc in ['left','right','top','bottom']:
+        ax.spines[loc].set_visible(False)
+    ax.axes.get_xaxis().set_visible(False)
+    ax.axes.get_yaxis().set_visible(False)
+    fig.show()
