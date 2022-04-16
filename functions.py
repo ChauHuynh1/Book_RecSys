@@ -164,3 +164,32 @@ def plot_world_map(df):
     ax.axes.get_xaxis().set_visible(False)
     ax.axes.get_yaxis().set_visible(False)
     fig.show()
+
+def short_title(title, max_len=40):
+    title = str(title).split(' ')
+    short_title = ''
+
+    for i in range(len(title)):
+        if len(short_title) < max_len:
+            short_title = ' '.join([short_title, title[i]])
+    short_title = short_title.strip()
+    return short_title
+
+def books_groupby(df, column, new_colname):
+    df_groupby = df.groupby(column).agg({'ISBN': 'count', 'Book_Rating': 'mean'}).reset_index()
+    df_groupby.columns = [new_colname, 'count', 'avg_rating']
+    return df_groupby
+
+def draw_top_chart(data, x, y_list, title):
+    fig, ax1 = plt.subplots(figsize=(20, 10))
+    plt.xticks(rotation=90)
+
+    palette = sns.color_palette("RdBu", len(data))
+
+    sns.barplot(x=x, y=y_list[0], data=data, palette=palette, ax=ax1)
+    ax1.set_title(title, fontsize=30, fontweight = 'bold')
+
+    ax2 = ax1.twinx()
+    sns.scatterplot(x=x, y=y_list[1], data=data, color='black', ax=ax2)
+
+    plt.show()
