@@ -80,3 +80,49 @@ def plot_number_of_rating_point(rating):
 
     ax.axes.get_yaxis().set_visible(False)
     fig.show()
+
+def create_array_for_drawing(user):
+    country = user.Country.value_counts()
+
+    coun = {}
+    for idx, val in country.items():
+        l = idx.split(',')
+        for i in l:
+            i = i.strip()
+            if i in coun.keys():
+                d = {}
+                d[i] = val + coun[i]
+                coun.update(d)
+            else:
+                d = {i:val}
+                coun.update(d)
+
+    nation, count = [],[]
+    for idx, val in coun.items():
+        nation.append(idx)
+        count.append(val)
+
+    return (pd.DataFrame({'country':nation, 'count': count})
+            .sort_values('count', ascending = False))
+
+def plot_box_country(df):
+    temp = create_array_for_drawing(df)
+    temp['color'] = temp['count'].apply(lambda x : '#b20710' if x > temp['count'].values[3] else 'grey')
+    # visulaization
+    fig, ax = plt.subplots(figsize = (18,8), dpi = 60)
+    fig.patch.set_facecolor('#f6f5f5')
+    ax.set_facecolor('#f6f5f5')
+
+    bar_kawrgs = {'edgecolor':'#f6f5f5'}
+    squarify.plot(sizes= temp['count'][0:10], label = temp['country'][0:10], ax = ax, color = temp['color'],  **bar_kawrgs,
+                text_kwargs = {'font':'serif', 'size':13, 'color':'black', 'weight':'bold', 'alpha':0.8},alpha = 0.9)
+
+    ax.text(0,115,'TOP 10 countries have the highest number of reader',{'font':'serif', 'size':35, 'color':'black', 'weight':'bold'}, alpha = 1)
+
+    ax.axes.get_xaxis().set_visible(False)
+    ax.axes.get_yaxis().set_visible(False)
+
+    for loc in ['left','right','top', 'bottom']:
+        ax.spines[loc].set_visible(False)
+
+    fig.show()
