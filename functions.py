@@ -5,8 +5,6 @@ import seaborn as sns
 import missingno as msno
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from wordcloud import WordCloud, STOPWORDS
-from dataprep.clean import validate_country
 import squarify
 import geopandas as gpd #Map
 import country_converter as coco
