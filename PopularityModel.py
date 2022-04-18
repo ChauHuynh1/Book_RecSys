@@ -47,7 +47,7 @@ class Popularity_Model():
 
 
 		# The first 15 items are saved into the Popularity_Model and it is returned. 
-		self.Popularity_Model = train_sort.head(15)
+		self.Popularity_Model = train_sort.head(10)
     
 	# Method to user created recommendations
 	def recommend(self, user_id):
