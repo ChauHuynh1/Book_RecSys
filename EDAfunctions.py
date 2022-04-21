@@ -6,8 +6,7 @@ import missingno as msno
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import squarify
-import geopandas as gpd #Map
-import country_converter as coco
+import geopandas as gpd
 import matplotlib
 
 def missing_percentage(df):
