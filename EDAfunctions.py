@@ -8,6 +8,7 @@ import matplotlib.patches as mpatches
 import squarify
 import geopandas as gpd
 import matplotlib
+import country_converter as coco
 
 def missing_percentage(df):
     """This function takes a DataFrame(df) as input and returns two columns, total missing values and total missing values percentage"""
