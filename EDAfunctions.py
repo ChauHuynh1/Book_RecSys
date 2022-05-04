@@ -164,7 +164,7 @@ def plot_world_map(df):
     fig.show()
 
 def draw_top_chart(data, x, y_list, title):
-    fig, ax1 = plt.subplots(figsize=(20, 10))
+    ax1 = plt.subplots(figsize=(20, 10))
     plt.xticks(rotation=90)
 
     palette = sns.color_palette("RdBu", len(data))
