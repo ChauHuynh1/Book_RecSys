@@ -163,14 +163,25 @@ def plot_world_map(df):
     ax.axes.get_yaxis().set_visible(False)
     fig.show()
 
+def short_title(title, max_len=40):
+    title = str(title).split(' ')
+    short_title = ''
+
+    for i in range(len(title)):
+        if len(short_title) < max_len:
+            short_title = ' '.join([short_title, title[i]])
+    short_title = short_title.strip()
+    return short_title
+
+
 def draw_top_chart(data, x, y_list, title):
-    ax1 = plt.subplots(figsize=(20, 10))
+    fig, ax1 = plt.subplots(figsize=(14, 6))
     plt.xticks(rotation=90)
 
     palette = sns.color_palette("RdBu", len(data))
 
     sns.barplot(x=x, y=y_list[0], data=data, palette=palette, ax=ax1)
-    ax1.set_title(title, fontsize=30, fontweight = 'bold')
+    ax1.set_title(title)
 
     ax2 = ax1.twinx()
     sns.scatterplot(x=x, y=y_list[1], data=data, color='black', ax=ax2)
