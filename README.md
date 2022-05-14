@@ -28,23 +28,6 @@ Contains the book rating information. Ratings (`Book-Rating`) are either explici
 
 ===========================================================================
 
-### How do I download the dataset?
-
-**Instructions also in the lecture "Download Dataset" in section 1 of the course**
-
-- Visit the [Kaggle Website](https://www.kaggle.com/ladcva/vietnam-housing-dataset-hanoi).
-
-- Remember to **log in**.
-
-- The download the file called **'VN_housing_dataset.csv'** and save it in the directory with the notebooks.
-
-**Note the following:**
-
-- You need to be logged in to Kaggle in order to download the datasets.
-- You need to accept the terms and conditions of the competition to download the dataset
-- If you save the file to the directory with the jupyter notebook, then you can run the code as it is written here.
-
-
 # WORKING ON YOUR LOCAL COMPUTER
 
 python version 3.8.8
