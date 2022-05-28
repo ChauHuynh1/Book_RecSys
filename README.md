@@ -1,4 +1,5 @@
 # Assignment 2: Group 2 Project: Book Recommender System (Recsys) - Machine Learning (COSC2753)
+## Contributors: Nguyen Dang Huynh Chau, Bui Minh Nhat, Tran Phuong Anh
 
 
 We will discuss:
